@@ -1,0 +1,42 @@
+table {
+    width: 100%;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-form-field-appearance-standard .mat-form-field-flex {
+    padding-top:0
+}
+
+.mat-column-btn{
+    text-align: center;
+}
+
+.hidden { display: none }
+
+.emptyMenssage {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.demo-button + .demo-button {
+margin-left: 8px;
+}

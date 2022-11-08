@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.flex {
+    display: flex;
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.title {
+    justify-content: center
+}
+
+.m-1 {
+    margin: 1rem;
+}
+
+.bold {
+    font-weight: bold;
+}

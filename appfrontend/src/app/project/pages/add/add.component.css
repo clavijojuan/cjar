@@ -1,0 +1,36 @@
+.example-container {
+    /* height: 400px; */
+    width: 550px;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.formContainer{
+    width: 80%;
+    height: auto !important;
+    margin-left: 10%;
+    margin-top: 2rem;
+}
+
+.formContainer form {
+    padding-top: 0.5rem;
+}
+
+.formContainer h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.formContainer .header {
+    display:flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+/* .col, .col-12, .col-6 {
+    padding: 0;
+} */

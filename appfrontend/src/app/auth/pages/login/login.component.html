@@ -1,0 +1,30 @@
+<mat-grid-list cols="1" rowHeight="3:1">
+    <mat-grid-tile>
+            <form class="example-form">
+
+                <div class="flex title bold m-1" style="font-size: 1.3rem;">
+                    Inicio de Sesión
+                </div>
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Usuario</mat-label>
+                    <input [(ngModel)]="userProperties.usuario" name="usuario" matInput placeholder="Ingrese su usuario" autocomplete="off">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Contraseña</mat-label>
+                    <input [(ngModel)]="userProperties.contrasena" name="contrasena" matInput [type]="hide ? 'password' : 'text'" autocomplete="off">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            
+                <div class="flex right">
+                    <button mat-raised-button color="primary" (click)="login($event)">Ingresar</button>
+                </div>
+            </form>
+        </mat-grid-tile>
+        
+</mat-grid-list>
+
+

@@ -1,0 +1,289 @@
+<div class="formContainer">
+
+    <div class="header">
+        <h3> {{ addDataObject.id ? 'Editar' : 'Agregar' }} registro para la tabla: {{table | tableName}} </h3>
+        <h3 *ngIf="addDataObject.id">Id: {{addDataObject.id}}</h3>
+    </div>
+
+    <form #addDataForm="ngForm">
+        <div class="container text-center">
+            <div class="row">
+              <div class="col" *ngIf="validateField(['familia', 'locacion', 'genero', 'especie', 'convenio', 'localidad', 'unidad', 'tipo_planta', 'animal'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input [ngModel]="addDataObject?.nombre" 
+                        matInput 
+                        required
+                        name="nombre" 
+                        autocomplete="off"
+                        type="text"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col-12" *ngIf="validateField(['planta'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Fecha de colección</mat-label>
+                    <input [ngModel]="addDataObject?.fecha_coleccion" 
+                        matInput 
+                        required
+                        name="fecha_coleccion" 
+                        autocomplete="off"
+                        type="date"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col-6" *ngIf="validateField(['planta'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Importancia</mat-label>
+                    <input [ngModel]="addDataObject?.importancia" 
+                        matInput 
+                        required
+                        name="importancia" 
+                        autocomplete="off"
+                        type="text"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col-6" *ngIf="validateField(['planta'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Medidas</mat-label>
+                    <input [ngModel]="addDataObject?.medidas" 
+                        matInput 
+                        required
+                        name="medidas" 
+                        autocomplete="off"
+                        type="text"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['planta'])">
+                <mat-form-field appearance="fill">
+                    <mat-label>Unidad</mat-label>
+                    <mat-select
+                    required 
+                    name="unidad_fk" [ngModel]="addDataObject?.unidad_fk" >
+                      <mat-option *ngFor="let obj of unidad_fk" [value]="obj.id">
+                        {{obj.nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+              
+              <div class="col" *ngIf="validateField(['planta', 'genero', 'animal'])">
+                <mat-form-field appearance="fill">
+                    <mat-label>Familia</mat-label>
+                    <mat-select
+                    required 
+                    name="familia_fk" [ngModel]="addDataObject?.familia_fk" >
+                      <mat-option *ngFor="let obj of familia_fk" [value]="obj.id">
+                        {{obj.nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+              
+              <div class="col" *ngIf="validateField(['planta', 'especie', 'animal'])">
+                <mat-form-field appearance="fill">
+                    <mat-label>Genero</mat-label>
+                    <mat-select
+                    required 
+                    name="genero_fk" [ngModel]="addDataObject?.genero_fk" >
+                      <mat-option *ngFor="let obj of genero_fk" [value]="obj.id">
+                        {{obj.nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+              
+              <div class="col" *ngIf="validateField(['planta', 'animal'])">
+                <mat-form-field appearance="fill">
+                    <mat-label>Especie</mat-label>
+                    <mat-select
+                    required 
+                    name="especie_fk" [ngModel]="addDataObject?.especie_fk" >
+                      <mat-option *ngFor="let obj of especie_fk" [value]="obj.id">
+                        {{obj.nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['planta'])">
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de planta</mat-label>
+                    <mat-select
+                    required 
+                    name="tipo_planta_fk" [ngModel]="addDataObject?.tipo_planta_fk" >
+                      <mat-option *ngFor="let obj of tipo_planta_fk" [value]="obj.id">
+                        {{obj.nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['planta', 'animal'])">
+                <mat-form-field appearance="fill">
+                    <mat-label>Locación</mat-label>
+                    <mat-select
+                        required 
+                        name="locacion_fk" [ngModel]="addDataObject?.locacion_fk" 
+                    >
+                        <mat-option *ngFor="let obj of locacion_fk" [value]="obj.id">
+                            {{obj.nombre}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-12" *ngIf="validateField(['planta']) && !addDataObject?.id">
+                    <mat-label>Fotografías </mat-label>
+                    <input 
+                        #photos
+                        required
+                        multiple
+                        accept="image/png, image/gif, image/jpeg"
+                        (change)="setFiles(photos)"
+                        type="file"
+                    >
+              </div>
+
+              <div class="col" *ngIf="validateField(['locacion', 'localidad'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Latitud</mat-label>
+                    <input [ngModel]="addDataObject?.latitud" 
+                        matInput 
+                        required
+                        name="latitud" 
+                        autocomplete="off"
+                        type="number"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['locacion', 'localidad'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Longitud</mat-label>
+                    <input [ngModel]="addDataObject?.longitud" 
+                        matInput 
+                        required
+                        name="longitud" 
+                        autocomplete="off"
+                        type="number"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['locacion', 'localidad'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>País</mat-label>
+                    <input [ngModel]="addDataObject?.pais" 
+                        matInput 
+                        required
+                        name="pais" 
+                        autocomplete="off"
+                        type="text"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['localidad'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Polaridad</mat-label>
+                    <input [ngModel]="addDataObject?.polaridad" 
+                        matInput 
+                        required
+                        name="polaridad" 
+                        autocomplete="off"
+                        type="text"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['localidad'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Altura</mat-label>
+                    <input [ngModel]="addDataObject?.altura" 
+                        matInput 
+                        required
+                        name="altura" 
+                        autocomplete="off"
+                        type="number"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['animal'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Repositorio</mat-label>
+                    <input [ngModel]="addDataObject?.repositorio" 
+                        matInput 
+                        required
+                        name="repositorio" 
+                        autocomplete="off"
+                        type="text"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['animal'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Fecha de colecta</mat-label>
+                    <input [ngModel]="addDataObject?.fecha_colecta" 
+                        matInput 
+                        required
+                        name="fecha_colecta" 
+                        autocomplete="off"
+                        type="date"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col" *ngIf="validateField(['animal'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Identificador alterno</mat-label>
+                    <input [ngModel]="addDataObject?.identificador_alterno" 
+                        matInput 
+                        required
+                        name="identificador_alterno" 
+                        autocomplete="off"
+                        type="text"
+                    >
+                </mat-form-field>
+              </div>
+
+              <div class="col-12" *ngIf="validateField(['localidad'])">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Comentarios</mat-label>
+                    <textarea [ngModel]="addDataObject?.comentarios" 
+                        matInput
+                        required
+                        name="comentarios"
+                    >
+                    </textarea>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </div>
+    </form>
+
+    <div class="flex between">
+        <button mat-raised-button 
+            (click)="goBack()"
+        >
+            Regresar
+        </button>
+
+        <button [disabled]="!addDataForm.valid" mat-raised-button 
+            color="primary" 
+            (click)="addData(addDataForm)"
+        >
+            {{ addDataObject.id ? 'Actualizar' : 'Crear' }}
+        </button>
+    </div>
+
+</div>

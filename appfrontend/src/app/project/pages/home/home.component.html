@@ -1,0 +1,45 @@
+<mat-sidenav-container fullscreen class="example-container">
+  <mat-sidenav #sidenav opened mode="push" disableClose="true">
+    <mat-toolbar color="primary">
+        <span>Menú de proyectos</span>
+    </mat-toolbar>
+
+    <mat-nav-list>
+        <div *ngFor="let project of projects">
+            <div *ngIf="project.visible">
+                <h3 class="flex" style="font-weight: bold; margin:0.5rem">
+                    <mat-icon>{{project.icon}}</mat-icon>
+                    {{project.label}}
+                </h3>
+        
+                <div style="padding-left:1rem; padding-right:1rem">
+                    <a *ngFor="let child of project.children"
+                        mat-list-item 
+                        [routerLink]="child.routerLink"  
+                        (click)="sidenav.close()"
+                    > 
+                        {{ child.label }} 
+                    </a>
+                </div>
+            </div>
+        </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.toggle(); clearRoute();">
+          <mat-icon>menu</mat-icon>
+        </button>
+
+        <span class="example-spacer"></span>
+
+        <span *ngIf="auth.usuario && auth.rol" class="m-1"> {{auth.usuario}} | {{auth.rol}} </span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
